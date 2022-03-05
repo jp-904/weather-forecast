@@ -10,15 +10,15 @@ if (!address){
     return console.log('Please provide an address!')
 }
 
-geocode(address, (error, data)=>{
+geocode(address, (error, {Latitude, Longitude, Location})=>{
     if (error){
         return console.log(error)
     }
-    forecast(data.Latitude, data.Longitude,(error, forecastData)=>{
+    forecast(Latitude, Longitude,(error, forecastData)=>{
         if(error){
             return console.log(error)
         }
-        console.log(data.Location)
+        console.log(Location)
         console.log(forecastData)
     })
 })

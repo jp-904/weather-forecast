@@ -19,16 +19,16 @@ const forecast = (latitude, longitude, callback)=>{
 
         const url = 'http://api.weatherstack.com/current?access_key=523e03a73096024f1d98bc44ee85759a&query=' +latitude+','+longitude;
 
-        request({url: url, json: true},(err, resp)=>{
+        request({url, json: true},(err, {body})=>{
             if(err){
                 callback('Network issue', undefined)
-            } else if(resp.body.error){
+            } else if(body.error){
                 callback('Unable to fetch weather info', undefined)
             } else {
                 callback(undefined, {
-                    'current_temp_description': resp.body.current.weather_descriptions[0],
-                    'current_temp':resp.body.current.temperature,
-                    'feel_like_temp':resp.body.current.feelslike
+                    'current_temp_description': body.current.weather_descriptions[0],
+                    'current_temp':body.current.temperature,
+                    'feel_like_temp':body.current.feelslike
                 })
             }
         })
